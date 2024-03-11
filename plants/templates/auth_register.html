@@ -1,0 +1,11 @@
+{% extends 'plantsbase.html' %}
+
+
+{% block content %}
+  <form method="post" class="form-group">
+    {% csrf_token %}
+    {{registerform.as_p}}
+    <input class="btn btn-success" type="submit" value='register'/>
+  </form>
+
+ {% endblock %}

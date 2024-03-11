@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wreef</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <!-- Our project just needs Font Awesome Free's Solid and Brand files -->
+    <link href="{%  static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{%  static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{%  static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+
+    
+    <style>
+        body{
+            font-family: cairo, Arial, "Helvetica Neue", Helvetica, sans-serif;
+        }
+        a{
+          color: black;
+          text-decoration-style: none;
+        }
+        .grid-container{
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-gap: 2px;
+
+        }
+        .vl {
+          border-left: 1px solid rgb(79, 79, 79);
+          height: 50px;
+        }
+        
+    </style>
+</head>
+<body style="background-color: #f6f5f5 ;">
+    <header>
+        <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light" style= "background-color: rgba(99, 177, 127, 1);" >
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        data-mdb-collapse-init
+        class="navbar-toggler"
+        type="button"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars text-white"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+          <i class="fa-brands fa-pagelines fa-rotate-by fa-lg text-white" style="--fa-rotate-angle: 20deg;"></i>
+        </a>
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item ">
+            <a class="nav-link text-white" href="{% url 'home' %}">الرئيسية</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'insideplants' %}">نباتات</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link text-white" href="{% url 'showequipments' %}">معدات</a>
+          </li>
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+  
+      <!-- Right elements -->
+      
+      <div class="d-flex align-items-center">
+        <!-- Icon -->
+        <a class="link-secondary me-3 text-white" href="#">
+          <i class="fas fa-shopping-cart text-white"></i>
+          <span class="badge rounded-pill badge-notification bg-danger">{{ request.session.countcart }}</span>
+        </a>
+       <!--profile-->
+       {% if request.user.is_authenticated %}
+        <p class="text-white">{{ user.username}}</p>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="row--md">
+            <div class="col-sm-8">
+            </div>
+            <div class="col-sm-4">
+              <img
+              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+              class="rounded-circle"
+              height="25"
+              loading="lazy"
+            />
+            </div>
+          </div>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu dropdown-menu-end" aria-labelledby="navbarDarkDropdownMenuLink">
+          <li><a class="dropdown-item text-center" href="#">{{ user.username }}</a></li>
+          <li>
+            <form action="{% url 'auth_logout' %}" method="post">
+              <button class="dropdown-item btn btn-link px-5 text-white" type="submit">تسجيل خروج</button>
+            </form>
+          </li>
+        </ul>
+      </li>
+    </ul>
+       {% else %}
+       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item ">
+          <a href="{% url 'auth_register' %}" class="nav-link text-white">حساب جديد</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'auth_login' %}" class="nav-link text-white">تسجيل دخول</a>
+        </li>
+      </ul>
+       {% endif %} 
+      </div>
+      <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+  
+  
+    </header>
+    <main>
+                {% block content %}
+             
+          
+          
+          
+                {% endblock %}
+    </main>
+    
+    
+</body>
+</html>

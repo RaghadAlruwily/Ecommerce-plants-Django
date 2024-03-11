@@ -1,0 +1,48 @@
+{% extends 'plantsbase.html' %}
+
+
+{% block content %}
+ <div class="grid-container px-5">
+    {% for item in plant %}
+                        <div class="col p-3">
+                            <div class="bg-image hover-zoom ripple shadow-1-strong rounded">
+                              <img src="/static/image/{{item.image}}"
+                                class="w-100"
+                                style="height: 200px;  object-fit: cover;"
+                                />
+                                <div class="mask " style="background-color: rgba(255, 255, 255, 0.3);">
+                                  <div class="row">
+                                    <div class="col d-flex justify-content-center mt-2">
+                                        <h5><strong>{{item.itemsid.name}}</strong></h5>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col d-flex justify-content-center">
+                                        <p class="text-muted">{{item.price}} SAR</p>
+                                    </div>
+                                </div>
+        
+                                    <div class="row">
+                                      <div class="col-sm-8 d-flex justify-content-end">
+                                        <a href="{% url 'details' id=item.id %}" class="">
+                                        <h5><span class="badge bg-success py-2 px-5 mt-2 text-white">شاهد التفاصيل</span></h5>
+                                        </a>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <a href="{% url 'add_to_cart' id=item.id %}" class="">
+                                          <h5><span class="badge bg-success py-2 mt-2 text-white"><i class=" fa-solid fa-cart-plus"></i></span></h5>
+                                        </a>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="hover-overlay">
+                                  <div class="mask" style="background-color: rgba(129, 221, 132, 0.15);"></div>
+                                </div>
+                            </div>
+                          </div>
+
+
+    {% endfor %}
+ </div>
+
+ {% endblock %}
